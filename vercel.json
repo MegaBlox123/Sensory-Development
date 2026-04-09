@@ -1,0 +1,10 @@
+{
+  "rewrites": [
+    { "source": "/terms", "destination": "/terms.html" },
+    { "source": "/privacy", "destination": "/privacy.html" },
+    { "source": "/blog", "destination": "blog.html" },
+    { "source": "/404", "destination": "/404.html" },
+    { "source": "/", "destination": "/index.html" }
+  ],
+  "cleanUrls": true
+}
