@@ -1,3 +1,4 @@
+
 :root{
   --accent: #ffd600; /* main color (yellow) */
   --dark-1: #000000; /* primary dark */
@@ -23,37 +24,6 @@ body{background:linear-gradient(180deg,var(--dark-1) 0%, #0f0f0f 100%);color:#ff
 .btn-coming{background:transparent;color:#ffd600;border:2px dashed rgba(255,214,0,0.18);font-weight:800;cursor:not-allowed;opacity:0.95;padding:8px 14px}
 .btn-coming[disabled]{filter:grayscale(.05);}
 
-/* Premium button - Solid yellow with black text */
-.btn-premium,
-.btn-yellow {
-  background: var(--accent);
-  color: #000;
-  font-weight: 900;
-  padding: 14px 24px;
-  border-radius: 999px;
-  text-decoration: none;
-  font-size: 15px;
-  min-width: 160px;
-  display: inline-block;
-  text-align: center;
-  border: none; /* ensure no border/dashed style leaks in */
-  box-shadow: 0 4px 15px rgba(255, 214, 0, 0.3); /* optional subtle glow */
-}
-
-.btn-blue {
-  background: #000;
-  padding: 14px 24px;
-  border-radius: 999px;
-  color: var(--accent);
-  text-decoration: none;
-  font-weight: 900;
-  font-size: 15px;
-  min-width: 160px;
-  display: inline-block;
-  text-align: center;
-  border: 2px solid rgba(255,214,0,0.08);
-}
-
 .hero{position:relative;padding-top:90px;padding-bottom:60px;overflow:hidden}
 .dots-layer{position:absolute;inset:0;background-image:radial-gradient(rgba(255,214,0,0.05) 6px, transparent 6px);background-size:48px 48px;opacity:1}
 .hero-shape{position:absolute;left:0;right:0;top:60px;height:420px;background:linear-gradient(180deg,var(--dark-2),var(--dark-1));border-bottom-left-radius:100px;border-bottom-right-radius:100px;box-shadow:0 24px 40px rgba(0,0,0,.6);}
@@ -75,6 +45,8 @@ body{background:linear-gradient(180deg,var(--dark-1) 0%, #0f0f0f 100%);color:#ff
 .tags{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
 .tag{background:rgba(255,214,0,0.08);padding:8px 12px;border-radius:999px;color:var(--accent);font-weight:600}
 .card-actions{margin-top:16px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.btn-yellow{background:var(--accent);padding:14px 24px;border-radius:999px;color:#000;text-decoration:none;font-weight:900;font-size:15px;min-width:160px;display:inline-block;text-align:center}
+.btn-blue{background:#000;padding:14px 24px;border-radius:999px;color:var(--accent);text-decoration:none;font-weight:900;font-size:15px;min-width:160px;display:inline-block;text-align:center;border:2px solid rgba(255,214,0,0.08)}
 
 @media (min-width:900px){
   .hero-title{font-size:64px}
