@@ -1,141 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Sensory Studio - Play & Learn</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@700;900&display=swap" rel="stylesheet">
+  
+  <style>
+    :root{
+      --accent: #ffd600; /* main color (yellow) */
+      --dark-1: #000000; /* primary dark */
+      --dark-2: #141414; /* secondary dark shade */
+      --muted: #6b7280;
+    }
 
-:root{
-  --accent: #ffd600; /* main color (yellow) */
-  --dark-1: #000000; /* primary dark */
-  --dark-2: #141414; /* secondary dark shade */
-  --muted: #6b7280;
-}
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial}
+    body{background:linear-gradient(180deg,var(--dark-1) 0%, #0f0f0f 100%);color:#fff}
 
-*{box-sizing:border-box}
-html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial}
-body{background:linear-gradient(180deg,var(--dark-1) 0%, #0f0f0f 100%);color:#fff}
+    .nav{position:fixed;top:0;left:0;width:100%;z-index:60;padding:12px 0}
+    .nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 20px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{height:44px}
+    .brand-text{font-weight:800;color:var(--accent);font-family:Poppins,Inter}
+    .nav-actions{display:flex;align-items:center;gap:12px}
+    .nav-link{color:#ffffff;text-decoration:none;font-weight:600;opacity:0.9}
 
-.nav{position:fixed;top:0;left:0;width:100%;z-index:60;padding:12px 0}
-.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 20px}
-.brand{display:flex;align-items:center;gap:12px}
-.logo{height:44px}
-.brand-text{font-weight:800;color:var(--accent);font-family:Poppins,Inter}
-.nav-actions{display:flex;align-items:center;gap:12px}
-.nav-link{color:#ffffff;text-decoration:none;font-weight:600;opacity:0.9}
-.btn{display:inline-block;padding:10px 18px;border-radius:28px;text-decoration:none}
-.btn-small{background:var(--accent);color:#000;font-weight:700}
+    .btn{display:inline-block;padding:10px 18px;border-radius:28px;text-decoration:none}
+    .btn-small{background:var(--accent);color:#000;font-weight:700}
 
-/* Coming soon / disabled button style */
-.btn-coming{background:transparent;color:#ffd600;border:2px dashed rgba(255,214,0,0.18);font-weight:800;cursor:not-allowed;opacity:0.95;padding:8px 14px}
-.btn-coming[disabled]{filter:grayscale(.05);}
+    /* Updated Coming Soon button - now clickable with nice hover */
+    .btn-coming{
+      background:transparent;
+      color:#ffd600;
+      border:2px dashed rgba(255,214,0,0.18);
+      font-weight:800;
+      padding:8px 14px;
+      cursor:pointer;
+      transition: all 0.25s ease;
+    }
+    .btn-coming:hover{
+      border-style: solid;
+      background:rgba(255,214,0,0.08);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(255,214,0,0.15);
+    }
 
-.hero{position:relative;padding-top:90px;padding-bottom:60px;overflow:hidden}
-.dots-layer{position:absolute;inset:0;background-image:radial-gradient(rgba(255,214,0,0.05) 6px, transparent 6px);background-size:48px 48px;opacity:1}
-.hero-shape{position:absolute;left:0;right:0;top:60px;height:420px;background:linear-gradient(180deg,var(--dark-2),var(--dark-1));border-bottom-left-radius:100px;border-bottom-right-radius:100px;box-shadow:0 24px 40px rgba(0,0,0,.6);}
-.hero-inner{position:relative;max-width:920px;margin:0 auto;padding:80px 28px;text-align:center;color:#fff;z-index:2}
-.hero-title{font-family:Poppins,Inter;font-size:48px;margin:0 0 14px;letter-spacing:0.02em;color:var(--accent)}
-.hero-sub{font-size:18px;margin:0 0 20px;opacity:0.9;color:#e6e6e6}
-.hero-cta{display:flex;gap:18px;justify-content:center}
-.btn-primary{background:var(--accent);color:#000;font-weight:800;padding:14px 28px;border-radius:999px}
-.btn-ghost{background:transparent;color:#fff;padding:12px 22px;border-radius:999px;font-weight:700;border:2px solid rgba(255,214,0,0.12)}
+    .hero{position:relative;padding-top:90px;padding-bottom:60px;overflow:hidden}
+    .dots-layer{position:absolute;inset:0;background-image:radial-gradient(rgba(255,214,0,0.05) 6px, transparent 6px);background-size:48px 48px;opacity:1}
+    .hero-shape{position:absolute;left:0;right:0;top:60px;height:420px;background:linear-gradient(180deg,var(--dark-2),var(--dark-1));border-bottom-left-radius:100px;border-bottom-right-radius:100px;box-shadow:0 24px 40px rgba(0,0,0,.6);}
+    .hero-inner{position:relative;max-width:920px;margin:0 auto;padding:80px 28px;text-align:center;color:#fff;z-index:2}
+    .hero-title{font-family:Poppins,Inter;font-size:48px;margin:0 0 14px;letter-spacing:0.02em;color:var(--accent)}
+    .hero-sub{font-size:18px;margin:0 0 20px;opacity:0.9;color:#e6e6e6}
+    .hero-cta{display:flex;gap:18px;justify-content:center}
+    .btn-primary{background:var(--accent);color:#000;font-weight:800;padding:14px 28px;border-radius:999px}
+    .btn-ghost{background:transparent;color:#fff;padding:12px 22px;border-radius:999px;font-weight:700;border:2px solid rgba(255,214,0,0.12)}
 
-.games{max-width:1200px;margin:40px auto;padding:48px 22px}
-.section-title{text-align:center;font-family:Poppins;font-size:32px;color:var(--accent);margin-bottom:26px}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:26px}
-.card{background:#0b0b0b;border-radius:18px;padding:18px;box-shadow:0 8px 24px rgba(0,0,0,.6);overflow:hidden;border:1px solid rgba(255,214,0,0.04)}
-.card-img{width:100%;height:160px;object-fit:cover;border-radius:12px}
-.card-body{padding:14px}
-.card-title{font-family:Poppins;color:var(--accent);margin:6px 0}
-.card-desc{color:var(--muted)}
-.tags{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
-.tag{background:rgba(255,214,0,0.08);padding:8px 12px;border-radius:999px;color:var(--accent);font-weight:600}
-.card-actions{margin-top:16px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
-.btn-yellow{background:var(--accent);padding:14px 24px;border-radius:999px;color:#000;text-decoration:none;font-weight:900;font-size:15px;min-width:160px;display:inline-block;text-align:center}
-.btn-blue{background:#000;padding:14px 24px;border-radius:999px;color:var(--accent);text-decoration:none;font-weight:900;font-size:15px;min-width:160px;display:inline-block;text-align:center;border:2px solid rgba(255,214,0,0.08)}
+    .games{max-width:1200px;margin:40px auto;padding:48px 22px}
+    .section-title{text-align:center;font-family:Poppins;font-size:32px;color:var(--accent);margin-bottom:26px}
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:26px}
+    .card{background:#0b0b0b;border-radius:18px;padding:18px;box-shadow:0 8px 24px rgba(0,0,0,.6);overflow:hidden;border:1px solid rgba(255,214,0,0.04)}
+    .card-img{width:100%;height:160px;object-fit:cover;border-radius:12px}
+    .card-body{padding:14px}
+    .card-title{font-family:Poppins;color:var(--accent);margin:6px 0}
+    .card-desc{color:var(--muted)}
+    .tags{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+    .tag{background:rgba(255,214,0,0.08);padding:8px 12px;border-radius:999px;color:var(--accent);font-weight:600}
+    .card-actions{margin-top:16px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+    .btn-yellow{background:var(--accent);padding:14px 24px;border-radius:999px;color:#000;text-decoration:none;font-weight:900;font-size:15px;min-width:160px;display:inline-block;text-align:center}
+    .btn-blue{background:#000;padding:14px 24px;border-radius:999px;color:var(--accent);text-decoration:none;font-weight:900;font-size:15px;min-width:160px;display:inline-block;text-align:center;border:2px solid rgba(255,214,0,0.08)}
 
-@media (min-width:900px){
-  .hero-title{font-size:64px}
-  .hero-sub{font-size:20px}
-}
+    @media (min-width:900px){
+      .hero-title{font-size:64px}
+      .hero-sub{font-size:20px}
+    }
 
-/* subtle sparkle animation */
-.sparkle{position:absolute;width:8px;height:8px;border-radius:50%;background:radial-gradient(circle,var(--accent) 60%,#facc15);opacity:.95;animation:spark 2.5s linear infinite}
-@keyframes spark{0%{transform:translateY(0) scale(1);opacity:.8}50%{transform:translateY(-18px) scale(1.2);opacity:1}100%{transform:translateY(-40px) scale(.8);opacity:0}}
+    /* Footer styles */
+    .site-footer{background:#071016;color:#cbd5e1;padding:56px 20px}
+    .footer-inner{max-width:1200px;margin:0 auto}
+    .footer-top{display:flex;gap:36px;align-items:flex-start;justify-content:space-between;padding-bottom:22px}
+    .footer-brand{display:flex;gap:14px;align-items:center}
+    .footer-logo{height:52px}
+    .footer-brand-text .copyright{font-weight:700;color:#ffffff}
+    .footer-brand-text .brand-sub{color:#9aa4b1;margin-top:6px}
+    .footer-links{display:flex;gap:48px}
+    .links-col h4{color:var(--accent);margin:0 0 10px;font-size:16px}
+    .links-col a{display:block;color:#cbd5e1;text-decoration:none;margin:6px 0;font-weight:600;opacity:0.9}
+    hr{border:0;border-top:1px solid rgba(255,255,255,0.04);margin:18px 0}
+    .footer-disclaimer{color:var(--muted);font-size:13.5px;line-height:1.6;padding-bottom:6px}
+    .footer-disclaimer p{margin:10px 0}
 
-/* Footer styles */
-.site-footer{background:#071016;color:#cbd5e1;padding:56px 20px}
-.footer-inner{max-width:1200px;margin:0 auto}
-.footer-top{display:flex;gap:36px;align-items:flex-start;justify-content:space-between;padding-bottom:22px}
-.footer-brand{display:flex;gap:14px;align-items:center}
-.footer-logo{height:52px}
-.footer-brand-text .copyright{font-weight:700;color:#ffffff}
-.footer-brand-text .brand-sub{color:#9aa4b1;margin-top:6px}
-.footer-links{display:flex;gap:48px}
-.links-col h4{color:var(--accent);margin:0 0 10px;font-size:16px}
-.links-col a{display:block;color:#cbd5e1;text-decoration:none;margin:6px 0;font-weight:600;opacity:0.9}
-hr{border:0;border-top:1px solid rgba(255,255,255,0.04);margin:18px 0}
-.footer-disclaimer{color:var(--muted);font-size:13.5px;line-height:1.6;padding-bottom:6px}
-.footer-disclaimer p{margin:10px 0}
-.heart{color:#ff4565;margin-left:6px}
+    @media (max-width:860px){
+      .footer-top{flex-direction:column;gap:18px}
+      .footer-links{flex-wrap:wrap}
+    }
 
-@media (max-width:860px){
-  .footer-top{flex-direction:column;gap:18px}
-  .footer-links{flex-wrap:wrap}
-}
+    @media (max-width:480px){
+      .card-actions .btn{display:block;width:100%;padding:14px 18px;font-size:15px}
+      .btn-yellow,.btn-blue{min-width:0}
+    }
 
-@media (max-width:480px){
-  .card-actions .btn{display:block;width:100%;padding:14px 18px;font-size:15px}
-  .btn-yellow,.btn-blue{min-width:0}
-}
+    /* Document / policy page styles */
+    .doc-main{max-width:920px;margin:48px auto;padding:28px;background:linear-gradient(180deg,#0f0f0f,#141414);border-radius:12px;color:#ffffff;box-shadow:0 14px 40px rgba(0,0,0,.6);border:1px solid rgba(255,214,0,0.04)}
+    .doc-title{color:var(--accent);font-family:Poppins,Inter;font-size:28px;margin:6px 0}
+    .doc-sub{color:var(--muted);font-size:14px;margin-bottom:16px}
+    .doc-content h2{color:var(--accent);margin-top:18px}
+    .doc-content p,.doc-content ul{color:#e6e6e6;line-height:1.65}
+    .doc-content ul{margin-left:18px}
+    .doc-content a{color:var(--accent);text-decoration:none;font-weight:600}
 
-/* Document / policy page styles */
-.doc-main{max-width:920px;margin:48px auto;padding:28px;background:linear-gradient(180deg,#0f0f0f,#141414);border-radius:12px;color:#ffffff;box-shadow:0 14px 40px rgba(0,0,0,.6);border:1px solid rgba(255,214,0,0.04)}
-.back-link{display:inline-flex;align-items:center;gap:8px;color:var(--muted);text-decoration:none;margin-bottom:12px;font-weight:700}
-.doc-title{color:var(--accent);font-family:Poppins,Inter;font-size:28px;margin:6px 0}
-.doc-sub{color:var(--muted);font-size:14px;margin-bottom:16px}
-.doc-content h2{color:var(--accent);margin-top:18px}
-.doc-content p,.doc-content ul{color:#e6e6e6;line-height:1.65}
-.doc-content ul{margin-left:18px}
-.doc-content a{color:var(--accent);text-decoration:none;font-weight:600}
-.doc-content a:hover{text-decoration:underline}
+    @media (max-width:560px){
+      .doc-main{padding:20px;margin:20px}
+      .doc-title{font-size:22px}
+    }
 
-@media (max-width:560px){
-  .doc-main{padding:20px;margin:20px}
-  .doc-title{font-size:22px}
-}
+    /* Blog page styles */
+    .blog-hero{background:linear-gradient(135deg, #141414 0%, var(--dark-2) 100%);padding:80px 28px;text-align:center;border-bottom:1px solid rgba(255,214,0,0.04)}
+    .blog-hero-content{max-width:900px;margin:0 auto}
+    .blog-title{font-family:Poppins,Inter;font-size:48px;color:var(--accent);margin:0 0 14px;letter-spacing:0.02em}
+    .blog-subtitle{font-size:18px;color:#e6e6e6;margin:0;opacity:0.9}
 
-/* Blog page styles */
-.blog-hero{background:linear-gradient(135deg, #141414 0%, var(--dark-2) 100%);padding:80px 28px;text-align:center;border-bottom:1px solid rgba(255,214,0,0.04)}
-.blog-hero-content{max-width:900px;margin:0 auto}
-.blog-title{font-family:Poppins,Inter;font-size:48px;color:var(--accent);margin:0 0 14px;letter-spacing:0.02em}
-.blog-subtitle{font-size:18px;color:#e6e6e6;margin:0;opacity:0.9}
+    .blog-grid{max-width:1200px;margin:40px auto;padding:48px 22px}
+    .blog-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:24px}
+    .blog-card{background:#0b0b0b;border-radius:12px;padding:24px;box-shadow:0 8px 24px rgba(0,0,0,.6);border:1px solid rgba(255,214,0,0.04);transition:transform 0.3s ease,box-shadow 0.3s ease;display:flex;flex-direction:column}
+    .blog-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(255,214,0,0.06)}
 
-.blog-grid{max-width:1200px;margin:40px auto;padding:48px 22px}
-.blog-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:24px}
-.blog-card{background:#0b0b0b;border-radius:12px;padding:24px;box-shadow:0 8px 24px rgba(0,0,0,.6);border:1px solid rgba(255,214,0,0.04);transition:transform 0.3s ease,box-shadow 0.3s ease;display:flex;flex-direction:column}
-.blog-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(255,214,0,0.06)}
+    .blog-card-header{display:flex;gap:12px;align-items:center;margin-bottom:14px;flex-wrap:wrap}
+    .blog-date{font-size:13px;color:var(--muted);font-weight:600}
+    .blog-category{background:rgba(255,214,0,0.08);color:var(--accent);padding:4px 10px;border-radius:20px;font-size:12px;font-weight:700}
 
-.blog-card-header{display:flex;gap:12px;align-items:center;margin-bottom:14px;flex-wrap:wrap}
-.blog-date{font-size:13px;color:var(--muted);font-weight:600}
-.blog-category{background:rgba(255,214,0,0.08);color:var(--accent);padding:4px 10px;border-radius:20px;font-size:12px;font-weight:700}
+    .blog-card-title{font-family:Poppins,Inter;color:var(--accent);margin:0 0 12px;font-size:20px;line-height:1.4}
+    .blog-card-excerpt{color:#cbd5e1;margin:0 0 16px;flex-grow:1;line-height:1.6;font-size:15px}
 
-.blog-card-title{font-family:Poppins,Inter;color:var(--accent);margin:0 0 12px;font-size:20px;line-height:1.4}
-.blog-card-excerpt{color:#cbd5e1;margin:0 0 16px;flex-grow:1;line-height:1.6;font-size:15px}
+    .blog-card-meta{display:flex;gap:12px;margin-bottom:16px;font-size:13px}
+    .read-time{color:var(--muted);font-weight:600}
 
-.blog-card-meta{display:flex;gap:12px;margin-bottom:16px;font-size:13px}
-.read-time{color:var(--muted);font-weight:600}
+    .blog-read-more{color:var(--accent);text-decoration:none;font-weight:700;font-size:15px;transition:opacity 0.2s ease}
+    .blog-read-more:hover{opacity:0.8}
 
-.blog-read-more{color:var(--accent);text-decoration:none;font-weight:700;font-size:15px;transition:opacity 0.2s ease}
-.blog-read-more:hover{opacity:0.8}
+    /* Discord invite boxes */
+    .discord-box{display:inline-flex;align-items:center;gap:8px;background:#5865F2;color:#fff;padding:8px 14px;border-radius:8px;text-decoration:none;font-weight:600;transition:opacity .2s;font-size:14px}
+    .discord-box:hover{opacity:0.85}
+    .discord-icon{width:20px;height:20px;fill:currentColor}
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="nav-inner">
+      <div class="brand">
+        <img src="assets/logo-small.svg" alt="logo" class="logo">
+        <span class="brand-text">Sensory Studio</span>
+      </div>
+      <nav class="nav-actions">
+        <a class="nav-link" href="#play">Play</a>
+        <a class="nav-link" href="blog.html">Blog</a>
+        <a class="nav-link" href="support.html">Support</a>
+        
+        <!-- Premium Button - Now links to premium.sensorystudio.online -->
+        <button onclick="window.location.href='https://premium.sensorystudio.online'" 
+                class="btn btn-small btn-coming" 
+                title="Go to Sensory Studio Premium">
+           Premium — Coming Soon
+        </button>
+      </nav>
+    </div>
+  </header>
 
-@media (max-width:900px){
-  .blog-title{font-size:36px}
-}
+  <main>
+    <section class="hero" id="hero">
+      <div class="dots-layer"></div>
+      <div class="hero-shape"></div>
+      <div class="hero-inner">
+        <h1 class="hero-title">Play & Learn Together!</h1>
+        <p class="hero-sub">We create educational, safe, and fun experiences. Everyone can join in, discover new things, and learn valuable skills while having a great time!</p>
 
-@media (max-width:560px){
-  .blog-hero{padding:48px 20px}
-  .blog-title{font-size:28px}
-  .blog-subtitle{font-size:16px}
-  .blog-grid{padding:20px}
-  .blog-cards{grid-template-columns:1fr}
-}
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#play">Play Now</a>
+          <a class="btn btn-ghost" href="#parents">Information for Parents</a>
+        </div>
+      </div>
+    </section>
 
-/* Discord invite boxes */
-.discord-box{display:inline-flex;align-items:center;gap:8px;background:#5865F2;color:#fff;padding:8px 14px;border-radius:8px;text-decoration:none;font-weight:600;transition:opacity .2s;font-size:14px}
-.discord-box:hover{opacity:0.85}
-.discord-icon{width:20px;height:20px;fill:currentColor}
+    <section class="parents" id="parents">
+      <div class="doc-main" style="max-width:900px;margin:40px auto;padding:22px;background:linear-gradient(180deg,#0f0f0f,#141414);border-radius:12px;color:#fff;box-shadow:0 14px 40px rgba(0,0,0,.6);">
+        <h2 class="doc-title" style="color:var(--accent);">Information for Parents</h2>
+        <p class="doc-sub">Practical guidance for supporting your child's learning in Sensory Studio experiences.</p>
+        <div class="doc-content" style="color:#e6e6e6;">
+          <p>Our games are designed to be educational, inclusive, and safe. We recommend parents:</p>
+          <ul>
+            <li>Set appropriate playtime limits and supervise young children.</li>
+            <li>Encourage cooperative play and discuss in-game learning outcomes.</li>
+            <li>Review platform safety settings and privacy controls.</li>
+          </ul>
+          <p>For more detailed advice, see our <a href="documents.html">Documents</a> or contact support at <a href="mailto:support@sensorystudio.online">support@sensorystudio.online</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="games" id="play">
+      <h2 class="section-title">Our Games</h2>
+      <div class="cards">
+        <article class="card">
+          <img src="assets/game2.png" alt="game 2" class="card-img">
+          <div class="card-body">
+            <h3 class="card-title">RolMax Shopping</h3>
+            <p class="card-desc">Learn how a real retail team works together — building skills in communication, responsibility, problem-solving, and teamwork — all while having fun in a fast-paced environment. Every role matters, and every team member helps make the store a success!</p>
+            <div class="tags">
+              <span class="tag">Retail</span>
+              <span class="tag">Teamwork</span>
+              <span class="tag">Roleplay</span>
+            </div>
+            <div class="card-actions">
+              <a class="btn btn-blue" href="https://www.roblox.com/games/117658335916726/RolMax-Shopping" target="_blank" rel="noopener noreferrer">Play on Roblox</a>
+              <a href="https://discord.gg/ksfdkzAS8k" class="discord-box" target="_blank" rel="noopener noreferrer">
+                <svg class="discord-icon" viewBox="0 0 24 24"><path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.128 12.3 12.3 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.7.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.89 19.89 0 0 0 5.993-3.03.08.08 0 0 0 .031-.057c.5-4.477-.838-8.987-3.548-12.66a.07.07 0 0 0-.032-.027z"/></svg>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="assets/game1.png" alt="game 1" class="card-img">
+          <div class="card-body">
+            <h3 class="card-title">Pathway Academy</h3>
+            <p class="card-desc">Take on exciting roles like team leader, problem solver, creative designer, researcher, or supporter...</p>
+            <div class="tags">
+              <span class="tag">Ro-School</span>
+              <span class="tag">Teamwork</span>
+              <span class="tag">Roleplay</span>
+            </div>
+            <div class="card-actions">
+              <a class="btn btn-yellow" href="https://www.roblox.com/games/104366775108615/Our-Campus-Pathway-Secondary" target="_blank">Play on Roblox</a>
+              <a href="https://discord.gg/qdTu9r2dtq" class="discord-box" target="_blank">
+                <svg class="discord-icon" viewBox="0 0 24 24"><path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.128 12.3 12.3 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.7.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.89 19.89 0 0 0 5.993-3.03.08.08 0 0 0 .031-.057c.5-4.477-.838-8.987-3.548-12.66a.07.07 0 0 0-.032-.027z"/></svg>
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="assets/logo.png" class="footer-logo">
+          <div class="footer-brand-text">
+            <div class="copyright">© 2026 Sensory Studio. All rights reserved.</div>
+            <div class="brand-sub">Creating educational, safe, and fun experiences with ♥</div>
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <div class="links-col">
+            <h4>Navigation</h4>
+            <a href="index.html">Home</a>
+            <a href="#">About Us</a>
+            <a href="#parents">For Parents</a>
+            <a href="support.html">Support</a>
+            <a href="documents.html">Documents</a>
+          </div>
+
+          <div class="links-col">
+            <h4>Legal</h4>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Service</a>
+            <a href="cookie.html">Cookie Policy</a>
+            <a href="strikes.html">Email Strike Policy</a>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="footer-disclaimer">
+        <p><strong>Disclaimers:</strong></p>
+        <p>External platforms (Roblox, Discord, etc.) operate under their own terms and privacy policies.</p>
+        <p>Contact support at <a href="mailto:support@sensorystudio.online">support@sensorystudio.online</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
