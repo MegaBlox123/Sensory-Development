@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Sensory Studio - Search Logger Dashboard</title>
+  <style>
+    body {font-family: Inter, sans-serif; background:#0a0a0a; color:#fff; padding:20px;}
+    table {width:100%; border-collapse:collapse; margin-top:20px;}
+    th, td {padding:12px; text-align:left; border-bottom:1px solid #333;}
+    th {background:#ffd600; color:#000;}
+    .flagged {background:#440000; color:#ff6666;}
+  </style>
+</head>
+<body>
+  <h1>🔴 Sensory Studio Search Logger</h1>
+  <button onclick="loadLogs()">Refresh Logs</button>
+  <table id="logTable">
+    <thead><tr><th>Time</th><th>PC</th><th>Search Query</th><th>Flagged</th></tr></thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    const SUPABASE_URL = "https://sqioddljbsefmtgflnxf.supabase.co";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNxaW9kZGxqYnNlZm10Z2ZsbnhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg0MTE0NjksImV4cCI6MjA5Mzk4NzQ2OX0.1_nG_xsQqZWyPjYwNSCwU_Hhp39TbRRf38s5x7X2E5E";
+
+    async function loadLogs() {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/search_logs?order=created_at.desc&limit=100`, {
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+        }
+      });
+      const data = await res.json();
+      
+      const tbody = document.querySelector('#logTable tbody');
+      tbody.innerHTML = '';
+      
+      data.forEach(row => {
+        const tr = document.createElement('tr');
+        if (row.flagged) tr.classList.add('flagged');
+        tr.innerHTML = `
+          <td>${new Date(row.created_at).toLocaleString()}</td>
+          <td>${row.pc_name}</td>
+          <td><strong>${row.search_query}</strong></td>
+          <td>${row.flagged_words ? row.flagged_words.join(", ") : ''}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    loadLogs();
+    setInterval(loadLogs, 8000); // auto refresh every 8 seconds
+  </script>
+</body>
+</html>
